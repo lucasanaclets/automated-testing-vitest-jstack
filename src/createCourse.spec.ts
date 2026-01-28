@@ -1,5 +1,8 @@
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import { createCourse } from "./createCourse";
+
+vi.useFakeTimers();
+vi.setSystemTime(new Date(2026, 0, 12));
 
 it("should return the course object on sucess", async () => {
   const course = await createCourse({ name: "Curso de testes" });
@@ -7,14 +10,12 @@ it("should return the course object on sucess", async () => {
   expect(course).toEqual({
     id: expect.any(String),
     name: "Curso de testes",
+    createdAt: new Date(),
   });
-
-  //   expect(course).toHaveProperty("name");
-  //   expect(course.name).toBe("Curso de testes");
 });
 
 it("should throw if no name is provided", async () => {
   const coursePromise = createCourse({ name: "" });
 
-  await expect(coursePromise).rejects.toThrow("Name is requered ");
+  await expect(coursePromise).rejects.toThrow("Name is required");
 });

@@ -7,6 +7,7 @@ type CreateCourseInput = {
 type CreateCourseOutput = {
   id: string;
   name: string;
+  createdAt: Date;
 };
 
 export async function createCourse(
@@ -19,5 +20,6 @@ export async function createCourse(
   return {
     id: randomUUID(),
     name: input.name,
+    createdAt: new Date(),
   };
 }
