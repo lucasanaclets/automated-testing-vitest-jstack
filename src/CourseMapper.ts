@@ -1,11 +1,12 @@
 type CourseDomain = {
   name: string;
-  description: undefined;
+  tags: string[];
 };
 
 type CourseApi = {
   course: {
     name: string;
+    tags?: string[];
   };
 };
 
@@ -13,7 +14,7 @@ export class CourseMapper {
   static toDomain(courseApi: CourseApi): CourseDomain {
     return {
       name: courseApi.course.name,
-      description: undefined,
+      tags: courseApi.course.tags ?? [],
     };
   }
 
@@ -21,6 +22,7 @@ export class CourseMapper {
     return {
       course: {
         name: courseDomain.name,
+        tags: courseDomain.tags,
       },
     };
   }
