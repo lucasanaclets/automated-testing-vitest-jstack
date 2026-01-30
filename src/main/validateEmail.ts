@@ -1,4 +1,4 @@
-import z, { safeParse } from "zod";
+import z from "zod";
 
 const schema = z.email();
 

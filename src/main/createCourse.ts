@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { CourseRepository } from "@/repository/CourseRepository";
 
 type CreateCourseInput = {
   name: string;
@@ -10,6 +10,8 @@ type CreateCourseOutput = {
   createdAt: Date;
 };
 
+const courseRepo = new CourseRepository();
+
 export async function createCourse(
   input: CreateCourseInput,
 ): Promise<CreateCourseOutput> {
@@ -17,9 +19,7 @@ export async function createCourse(
     throw new Error("Name is required");
   }
 
-  return {
-    id: randomUUID(),
-    name: input.name,
-    createdAt: new Date(),
-  };
+  const course = courseRepo.create(input.name);
+
+  return course;
 }
